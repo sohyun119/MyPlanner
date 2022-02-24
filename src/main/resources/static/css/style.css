@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+#wrap{
+	width:1200px;
+	height:800px;
+	margin:auto;
+}
+
+header{
+	height:150px;
+}
+
+.signImg{
+	background-image: url("https://cdn.pixabay.com/photo/2021/03/28/13/02/lists-6131220_1280.jpg");
+}
+#signBox{
+	width:400px;
+	height:500px;
+}
+
+#signInnerBox{
+	width:350px;
+}
