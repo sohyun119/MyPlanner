@@ -19,7 +19,7 @@
 </head>
 <body>
 
-	<div id="wrap" class="signImg">
+	<div id="wrap">
 		
 		<header>
 		
@@ -27,9 +27,9 @@
 		
 		<section class="d-flex justify-content-center">
 		
-			<div id="signBox" class="border d-flex justify-content-center">
+			<div id="signUpBox" class="border d-flex justify-content-center">
 				<div id="signInnerBox" class="mt-4">
-					<div class="display-4 font-italic text-center text-white">My Planner</div>
+					<div class="display-4 font-italic text-center">My Planner</div>
 					<input type="text" id="emailInput" class="form-control mt-4" placeholder="이메일 주소">
 					<input type="text" id="nameInput" class="form-control mt-3" placeholder="이름">
 					<div class="mt-3 d-flex">
@@ -40,6 +40,9 @@
 					<input type="password" id="passwordCheckInput" class="form-control mt-3" placeholder="비밀번호 확인">
 					
 					<button type="button" id="signUpBtn" class="btn btn-info form-control mt-3">회원가입</button>
+					
+					<hr>
+					<div class="text-center">아이디가 있으신가요? <a href="/user/signin_view">로그인</a></div>
 				</div>
 			
 			</div>
@@ -47,6 +50,99 @@
 	
 	
 	</div>
+	
+	<script>
+	
+		$(document).ready(function(){
+			var is_duplicate = true;
+			
+			$("#duplicateBtn").on("click",function(){
+				let loginId = $("#loginIdInput").val();
+				if(loginId == ""){
+					alert("아이디를 입력해 주세요.");
+					return;
+				}
+				
+				$.ajax({
+					type:"get",
+					url:"/user/is_duplicate_id",
+					data:{"loginId":loginId},
+					success:function(data){
+						if(data.duplicate == "true"){
+							alert("아이디가 중복되었습니다.");
+							is_duplicate = true;
+						}else{
+							alert("사용가능한 아이디 입니다.");
+							is_duplicate = false;
+						}
+					},
+					error:function(){
+						alert("에러 발생");
+					}
+				});
+			});
+			
+			$("#loginIdInput").on("input",function(){ // *** 아이디를 다시 수정하는 순간 다시 중복검사를 하게 만든다!!!!!!!
+				is_duplicate = true;
+			});
+			
+			$("#signUpBtn").on("click", function(){
+				let email = $("#emailInput").val();
+				let name = $("#nameInput").val();
+				let loginId = $("#loginIdInput").val();
+				let password = $("#passwordInput").val();
+				let passwordCheck = $("#passwordCheckInput").val();
+				
+				if(email == ""){
+					alert("이메일을 입력해 주세요.");
+					return;
+				}
+				if(name == ""){
+					alert("이름을 입력해 주세요.");
+					return;
+				}
+				if(loginId == ""){
+					alert("아이디를 입력해 주세요.");
+					return;
+				}
+				if(is_duplicate == true){
+					alert("아이디 중복확인을 해주세요.");
+					return;
+				}
+				if(password == ""){
+					alert("비밀번호를 입력해 주세요.");
+					return;
+				}
+				if(password != passwordCheck){
+					alert("비밀번호가 같지 않습니다.");
+					return;
+				}
+				
+				$.ajax({
+					type:"post",
+					url:"/user/sign_up",
+					data:{"email":email,"name":name,"loginId":loginId,"password":password},
+					success:function(data){
+						if(data.result == "success"){
+							alert("회원가입 완료!");
+							location.href = "/user/signin_view";
+						}else{
+							alert("회원가입 오류");
+						}
+					},
+					error:function(){
+						alert("에러 발생");
+					}
+				});
+				
+			});
+			
+		});
+	
+	
+	
+	
+	</script>
 
 </body>
 </html>

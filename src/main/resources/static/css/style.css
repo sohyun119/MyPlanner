@@ -10,12 +10,13 @@ header{
 	height:150px;
 }
 
-.signImg{
-	background-image: url("https://cdn.pixabay.com/photo/2021/03/28/13/02/lists-6131220_1280.jpg");
-}
-#signBox{
+#signUpBox{
 	width:400px;
 	height:500px;
+}
+#signInBox{
+	width:400px;
+	height:350px;
 }
 
 #signInnerBox{
