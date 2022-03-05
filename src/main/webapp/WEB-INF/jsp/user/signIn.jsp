@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,12 +20,12 @@
 	
 	<div id="wrap">
 	
-		<header></header>
+		<c:import url="/WEB-INF/jsp/include/header.jsp"/>
 		
 		<section class="d-flex justify-content-center">
 			<div id="signInBox" class="border d-flex justify-content-center">
 				<div id="signInnerBox" class="mt-4">
-					<form id="loginform">
+					<form id="loginForm">
 						<div class="display-4 font-italic text-center">My Planner</div>
 						<input type="text" id="loginIdInput" class="form-control mt-4" placeholder="아이디">
 						<input type="password" id="passwordInput" class="form-control mt-3" placeholder="비밀번호">
@@ -35,13 +37,35 @@
 			</div>
 		</section>
 		
+		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
 	
 	<script>
 	
 		$(document).ready(function(){
 			
-			
+			$("#loginForm").on("submit", function(e){
+				e.preventDefault();
+				
+				let loginId = $("#loginIdInput").val();
+				let password = $("#passwordInput").val();
+				
+				$.ajax({
+					type:"post",
+					url:"/user/sign_in",
+					data:{"loginId":loginId,"password":password},
+					success:function(data){
+						if(data.result == "success"){
+							location.href="/plan/todoList_view";
+						}else{
+							alert("로그인 실패");
+						}
+					},
+					error:function(){
+						alert("에러 발생");
+					}
+				});
+			});	
 			
 			
 		});

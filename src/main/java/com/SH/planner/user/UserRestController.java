@@ -3,6 +3,9 @@ package com.SH.planner.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SH.planner.user.bo.UserBO;
+import com.SH.planner.user.model.User;
 
 @RestController
 @RequestMapping("/user")
@@ -56,6 +60,32 @@ public class UserRestController {
 		
 		return map;
 	}
+	
+	@PostMapping("/sign_in")
+	public Map<String, String> sign_in(
+			@RequestParam("loginId") String loginId
+			, @RequestParam("password") String password
+			, HttpServletRequest request
+			){
+		HttpSession session = request.getSession();
+		
+		User user = userBO.signIn(loginId, password);
+		
+		Map<String, String> map = new HashMap<>();
+		if(user != null) {
+			map.put("result", "success");
+			
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userName", user.getName());
+		}
+		else {
+			map.put("result", "fail");
+		}
+		
+		return map;
+	}
+	
 	
 	
 	

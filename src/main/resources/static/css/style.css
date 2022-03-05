@@ -9,10 +9,16 @@
 header{
 	height:150px;
 }
+.content{
+	width:600px;
+}
+#todoListBox{
+	width:400px;
+}
 
 #signUpBox{
 	width:400px;
-	height:500px;
+	height:550px;
 }
 #signInBox{
 	width:400px;
