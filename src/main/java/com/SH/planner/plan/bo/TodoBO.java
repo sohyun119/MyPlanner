@@ -17,10 +17,9 @@ public class TodoBO {
 	
 	public List<TodoList> selectTodoList(
 			int userId
-			, Date startDate
-			, Date endDate
+			, Date today
 			){
-		return todoDAO.selectTodoList(userId, startDate, endDate);
+		return todoDAO.selectTodoList(userId, today);
 	}
 
 }

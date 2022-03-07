@@ -44,6 +44,9 @@
 	
 		$(document).ready(function(){
 			
+			var today = new Date();
+			
+			
 			$("#loginForm").on("submit", function(e){
 				e.preventDefault();
 				

@@ -13,8 +13,7 @@ public interface TodoDAO {
 	
 	public List<TodoList> selectTodoList(
 			@Param("userId") int userId
-			, @Param("startDate") Date startDate
-			, @Param("endDate") Date endDate
+			, @Param("today") Date today
 			);
 
 }

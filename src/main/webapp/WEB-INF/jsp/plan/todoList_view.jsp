@@ -18,14 +18,14 @@
 </head>
 <body>
 
-	<di id="wrap">
+	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	
 		<section class="d-flex justify-content-center">
 			<div class="content border d-flex justify-content-center">
 				<div id="todoListBox">
 					<c:forEach var="todoList" items="${todoList }">
-						<div>${todoList }</div>
+						<div>${todoList.title }</div>
 					</c:forEach>
 							
 					<div class="d-flex justify-content-center">
