@@ -1,5 +1,6 @@
 package com.SH.planner.plan;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,8 +28,12 @@ public class TodoController {
 	public String todoListView(
 			HttpServletRequest request
 			, Model model
-			) {
+			) throws ParseException {
+		// xml에서 날짜비교를 위해 formatter 를 이용하여 보내주어야 한다. 
 		Date today = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String date = formatter.format(today);
+		today = formatter.parse(date);
 	
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");

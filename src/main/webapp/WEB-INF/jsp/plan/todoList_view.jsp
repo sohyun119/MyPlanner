@@ -31,11 +31,21 @@
 			<!-- todo list -->		
 			<div class="col-6">
 				<c:forEach var="todoList" items="${todoList }">
-					<div>${todoList.title }</div>
+					<div>
+						<c:choose>
+							<c:when test="${todoList.title == '' }">
+								<div><i class="bi bi-check-square"></i></div>
+							</c:when>
+							<c:otherwise>
+								<div><i class="bi bi-square"></i></div>
+							</c:otherwise>
+						</c:choose>
+						<div>${todoList.title }</div>
+					</div>
 				</c:forEach>
 				
 				<!-- 일정 추가 -->
-				<div class="d-flex justify-content-center">
+				<div class="d-flex justify-content-center mt-3">
 					<input type="text" id="addTodo" class="form-control" placeholder="+ 일정추가">
 					<button type="button" id="addTodoBtn" class="btn btn-secondary btn-sm ml-2">추가</button>
 				</div>
@@ -77,6 +87,7 @@
 					data:{"title":title,"date":date,"color":color},
 					success:function(data){
 						if(data.result == "success"){
+							alert("입력성공!");
 							location.reload();
 						}else{
 							alert("입력실패");

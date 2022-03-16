@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,7 +33,8 @@ public class TodoRestController {
 			, HttpServletRequest request
 			) throws ParseException{
 		
-		int userId = (Integer)request.getAttribute("userId");
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
 		
 		int count = todoBO.basicAddTodo(userId, title, date, color);
 		
