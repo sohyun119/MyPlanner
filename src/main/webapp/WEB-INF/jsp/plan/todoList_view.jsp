@@ -66,12 +66,10 @@
 			
 			
 			$("#addTodoBtn").on("click", function(){
-
-				let date = $("#calender").datepicker().val();
 				
+				let date = $("#calender").val();
 				let title = $("#addTodo").val();
-				let color = 'black';
-			 	alert(date);
+				let color = "black";
 			 	
 				$.ajax({
 					type:"post",
