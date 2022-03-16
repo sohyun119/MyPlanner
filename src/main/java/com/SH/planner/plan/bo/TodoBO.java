@@ -15,11 +15,12 @@ public class TodoBO {
 	@Autowired
 	private TodoDAO todoDAO;
 	
-	public List<TodoList> selectTodoList(
-			int userId
-			, Date today
-			){
-		return todoDAO.selectTodoList(userId, today);
+	public List<TodoList> selectTodoList(int userId, Date date){
+		return todoDAO.selectTodoList(userId, date);
+	}
+	
+	public int basicAddTodo(int userId, String title, Date date, String color) {
+		return todoDAO.basicInsertTodo(userId, title, date, color);
 	}
 
 }

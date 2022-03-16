@@ -8,12 +8,13 @@
 			<c:when test="${empty userId}"></c:when>
 			
 			<c:when test="${not empty userId }">
-				<div class="d-flex justify-content-center">
-					<div class="w-50 border">
-						<h3>To do List</h3>
+				<div class="d-flex justify-content-center mt-5">
+					<div class="w-50 d-flex justify-content-between">
+						<h2>To do List</h2>
 						<a href="/user/sign_out">로그아웃</a>
 					</div>
 				</div>
+				<hr>
 			</c:when>
 		</c:choose>
 	</header>

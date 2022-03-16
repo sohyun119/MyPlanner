@@ -7,12 +7,19 @@ public class TodoList {
 	private int id;
 	private int userId;
 	private String title;
+	private Date date;
 	private Date startDate;
 	private Date endDate;
 	private String color;
 	private Date createdAt;
 	private Date updatedAt;
 	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	public int getId() {
 		return id;
 	}

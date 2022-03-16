@@ -9,6 +9,7 @@
 			`id`
 			, `userId`
 			, `title`
+			, `date`
 			, `startDate`
 			, `endDate`
 			, `color`
@@ -16,12 +17,33 @@
 			, `updatedAt`
 		FROM 
 			`todoList`
-		<![CDATA[
-			WHERE
-			`startDate` <= #{today} AND `endDate` >= #{today} AND `userId` = #{userId}
-		]]>
+		WHERE
+			((`startDate`<![CDATA[ <= ]]>#{date} AND `endDate` >= #{date}) OR `date` = #{date} ) 
+			AND `userId` = #{userId}
+		
 	</select>
 
+
+	<insert id="basicInsertTodo" parameterType="map">
+		INSERT INTO `todoList`
+		(
+			`userId`
+			, `title`
+			, `date`
+			, `color`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{userId}
+			, #{title}
+			, #{date}
+			, #{color}
+			, now()
+			, now()
+		)
+	</insert>
 
 
 

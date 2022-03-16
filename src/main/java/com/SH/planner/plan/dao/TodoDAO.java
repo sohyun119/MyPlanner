@@ -13,7 +13,14 @@ public interface TodoDAO {
 	
 	public List<TodoList> selectTodoList(
 			@Param("userId") int userId
-			, @Param("today") Date today
+			, @Param("date") Date date
 			);
 
+	public int basicInsertTodo(
+			@Param("userId") int userId
+			, @Param("title") String title
+			, @Param("date") Date date
+			, @Param("color") String color
+			);	
+	
 }
