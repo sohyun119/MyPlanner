@@ -46,6 +46,14 @@
 	</insert>
 
 
+	<select id="isChecked" parameterType="int" resultType="boolean">
+		SELECT 
+			`isCheck`
+		FROM
+			`check`
+		WHERE
+			`todoListId`=#{todoListId}
+	</select>
 
 
 

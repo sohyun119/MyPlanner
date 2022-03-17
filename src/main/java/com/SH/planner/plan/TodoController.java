@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.SH.planner.plan.bo.TodoBO;
 import com.SH.planner.plan.model.TodoList;
+import com.SH.planner.plan.model.TodoListCheck;
 
 @Controller
 @RequestMapping("/plan")
@@ -39,8 +40,9 @@ public class TodoController {
 		int userId = (Integer)session.getAttribute("userId");
 		
 		List<TodoList> todoList = todoBO.selectTodoList(userId, today);
+		List<TodoListCheck> todoListCheck = todoBO.selectTodoListCheck(todoList);
 		
-		model.addAttribute("todoList", todoList);
+		model.addAttribute("allTodoList", todoListCheck);
 		
 		return "plan/todoList_view";
 	}

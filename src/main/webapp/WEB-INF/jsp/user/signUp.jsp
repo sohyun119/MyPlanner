@@ -25,10 +25,10 @@
 		<section class="d-flex justify-content-center">
 		
 			<div id="signUpBox" class="border d-flex justify-content-center">
-				<div id="signInnerBox" class="mt-3">
-					<div class="display-4 font-italic text-center">My Planner</div>
+				<div id="signInnerBox" class="mt-4">
+					<h1 class="font-italic text-center">My Planner</h1>
 					<div class="mt-4 text-secondary">투두 리스트와 캘린더, 다이어리를 한 번에 관리하세요!</div>
-					<input type="text" id="emailInput" class="form-control mt-2" placeholder="이메일 주소">
+					<input type="text" id="emailInput" class="form-control mt-4" placeholder="이메일 주소">
 					<input type="text" id="nameInput" class="form-control mt-3" placeholder="이름">
 					<div class="mt-3 d-flex">
 						<input type="text" id="loginIdInput" class="form-control" placeholder="아이디">

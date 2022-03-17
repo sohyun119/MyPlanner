@@ -26,8 +26,9 @@
 			<div id="signInBox" class="border d-flex justify-content-center">
 				<div id="signInnerBox" class="mt-4">
 					<form id="loginForm">
-						<div class="display-4 font-italic text-center">My Planner</div>
-						<input type="text" id="loginIdInput" class="form-control mt-4" placeholder="아이디">
+						<h1 class="font-italic text-center">My Planner</h1>
+						<div class="mt-3 text-secondary text-center">계획과 기록을 보려면 로그인 하세요!</div>
+						<input type="text" id="loginIdInput" class="form-control mt-3" placeholder="아이디">
 						<input type="password" id="passwordInput" class="form-control mt-3" placeholder="비밀번호">
 						<button type="submit" class="btn btn-info form-control mt-3">로그인</button>
 					</form>

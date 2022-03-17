@@ -30,7 +30,7 @@
 			
 			<!-- todo list -->		
 			<div class="col-6">
-				<c:forEach var="todoList" items="${todoList }">
+				<c:forEach var="todoList" items="${allTodoList }">
 					<div>
 						<c:choose>
 							<c:when test="${todoList.title == '' }">

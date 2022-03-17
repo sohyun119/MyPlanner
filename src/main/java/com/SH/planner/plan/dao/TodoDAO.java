@@ -23,4 +23,6 @@ public interface TodoDAO {
 			, @Param("color") String color
 			);	
 	
+	public boolean isChecked(@Param("todoListId") int todoListId);
+	
 }
