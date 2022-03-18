@@ -16,13 +16,17 @@ public interface TodoDAO {
 			, @Param("date") Date date
 			);
 
-	public int basicInsertTodo(
-			@Param("userId") int userId
-			, @Param("title") String title
-			, @Param("date") Date date
-			, @Param("color") String color
+	public TodoList basicInsertTodo(
+			@Param("todoList") TodoList todoList 
 			);	
 	
+	public int defaultCheck(@Param("id") int id);
+	
+	
+	
 	public boolean isChecked(@Param("todoListId") int todoListId);
+	
+	
+	
 	
 }

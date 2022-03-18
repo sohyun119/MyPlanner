@@ -30,17 +30,17 @@
 			
 			<!-- todo list -->		
 			<div class="col-6">
-				<c:forEach var="todoList" items="${allTodoList }">
+				<c:forEach var="data" items="${allTodoList }">
 					<div>
 						<c:choose>
-							<c:when test="${todoList.title == '' }">
+							<c:when test="${data.isCheck == true} ">
 								<div><i class="bi bi-check-square"></i></div>
 							</c:when>
 							<c:otherwise>
 								<div><i class="bi bi-square"></i></div>
 							</c:otherwise>
 						</c:choose>
-						<div>${todoList.title }</div>
+						<div>${data.todoList.title }</div>
 					</div>
 				</c:forEach>
 				

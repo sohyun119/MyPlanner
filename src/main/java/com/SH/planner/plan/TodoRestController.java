@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SH.planner.plan.bo.TodoBO;
+import com.SH.planner.plan.model.TodoList;
 
 @RestController
 @RequestMapping("/plan")
@@ -36,7 +37,14 @@ public class TodoRestController {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
-		int count = todoBO.basicAddTodo(userId, title, date, color);
+		TodoList todoList = new TodoList();
+		todoList.setUserId(userId);
+		todoList.setColor(color);
+		todoList.setTitle(title);
+		todoList.setDate(date);
+		int id = todoBO.basicAddTodo(todoList);
+		
+		int count = todoBO.defaultCheck(id);
 		
 		Map<String, String> map = new HashMap<>();
 		if(count == 1) {

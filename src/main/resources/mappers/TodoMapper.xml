@@ -24,7 +24,7 @@
 	</select>
 
 
-	<insert id="basicInsertTodo" parameterType="map">
+	<insert id="basicInsertTodo" parameterType="com.SH.planner.plan.model.TodoList">
 		INSERT INTO `todoList`
 		(
 			`userId`
@@ -41,6 +41,25 @@
 			, #{date}
 			, #{color}
 			, now()
+			, now()
+		)
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+		
+	</insert>
+	
+	<insert id="defaultCheck" parameterType="int">
+		INSERT INTO `check`
+		(
+			`todoListId`
+			, `isCheck`
+			, `createdAt`
+		)
+		VALUES
+		(
+			#{id}
+			, `false`
 			, now()
 		)
 	</insert>

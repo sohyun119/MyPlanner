@@ -22,21 +22,31 @@ public class TodoBO {
 	}
 	
 	public List<TodoListCheck> selectTodoListCheck(List<TodoList> todoList){
-		TodoListCheck todoCheck = new TodoListCheck();
 		List<TodoListCheck> todoListCheck = new ArrayList<>();
 		
 		for(int i=0; i<todoList.size(); i++) {
+			TodoListCheck todoCheck = new TodoListCheck();
+			
 			todoCheck.setTodoList(todoList.get(i));
 			boolean isCheck = todoDAO.isChecked(todoList.get(i).getId());
 			todoCheck.setCheck(isCheck);
+			
 			todoListCheck.add(todoCheck);
 		}
 		
 		return todoListCheck;
 	}
 	
-	public int basicAddTodo(int userId, String title, Date date, String color) {
-		return todoDAO.basicInsertTodo(userId, title, date, color);
+	public int basicAddTodo(TodoList todoList) {
+		TodoList todolist = todoDAO.basicInsertTodo(todoList);
+		int id = todolist.getId();
+		return id;	
 	}
-
+	
+	public int defaultCheck(int id) {
+		return todoDAO.defaultCheck(id);
+	}
+	
+	
+	
 }
