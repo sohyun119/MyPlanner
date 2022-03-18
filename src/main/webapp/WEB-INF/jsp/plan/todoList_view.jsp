@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <!DOCTYPE html>
 <html>
@@ -31,6 +32,7 @@
 			
 			<!-- todo list -->		
 			<div class="col-6">
+				<h4 class="mb-4 text-center" id="datePick"><fmt:formatDate value="${checkDate }" pattern="yyyy-MM-dd"/></h4>
 				<c:forEach var="data" items="${allTodoList }">
 					<div class="d-flex">
 						<c:choose>
@@ -77,13 +79,17 @@
 				toggleActive: true
 			});
 			
+			$("#calender").change( function(){
+				let pick = $("#calender").val();
+				location.href="/plan/todoList_view_otherDay?date=" + pick;
+			});
 			
 			$("#addTodoBtn").on("click", function(){
 				
 				let date = $("#calender").val();
 				let title = $("#addTodo").val();
 				let color = "black";
-			 	
+			 	alert(date);
 				$.ajax({
 					type:"post",
 					url:"/plan/todo/create",

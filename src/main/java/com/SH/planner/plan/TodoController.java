@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.SH.planner.plan.bo.TodoBO;
 import com.SH.planner.plan.model.TodoList;
@@ -43,6 +45,26 @@ public class TodoController {
 		List<TodoListCheck> todoListCheck = todoBO.selectTodoListCheck(todoList);
 		
 		model.addAttribute("allTodoList", todoListCheck);
+		model.addAttribute("checkDate", today);
+		
+		return "plan/todoList_view";
+	}
+	
+	@RequestMapping("/todoList_view_otherDay")
+	public String todoListView_otherDay(
+			HttpServletRequest request
+			, Model model,
+			@DateTimeFormat(pattern="yyyy-MM-dd")
+			@RequestParam("date") Date date
+			) {
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		List<TodoList> todoList = todoBO.selectTodoList(userId, date);
+		List<TodoListCheck> todoListCheck = todoBO.selectTodoListCheck(todoList);
+		
+		model.addAttribute("allTodoList", todoListCheck);
+		model.addAttribute("checkDate", date);
 		
 		return "plan/todoList_view";
 	}
