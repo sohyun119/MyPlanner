@@ -38,8 +38,8 @@ public class TodoBO {
 	}
 	
 	public int basicAddTodo(TodoList todoList) {
-		TodoList todolist = todoDAO.basicInsertTodo(todoList);
-		int id = todolist.getId();
+		int count = todoDAO.basicInsertTodo(todoList);
+		int id = todoList.getId();
 		return id;	
 	}
 	

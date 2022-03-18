@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
@@ -31,16 +32,16 @@
 			<!-- todo list -->		
 			<div class="col-6">
 				<c:forEach var="data" items="${allTodoList }">
-					<div>
+					<div class="d-flex">
 						<c:choose>
-							<c:when test="${data.isCheck == true} ">
-								<div><i class="bi bi-check-square"></i></div>
+							<c:when test="${data.check == true} ">
+								<div id="cancleCheck"><i class="bi bi-check-square"></i></div>
 							</c:when>
 							<c:otherwise>
-								<div><i class="bi bi-square"></i></div>
+								<div id="check"><i class="bi bi-square"></i></div>
 							</c:otherwise>
 						</c:choose>
-						<div>${data.todoList.title }</div>
+						<div class="ml-2">${data.todoList.title }</div>
 					</div>
 				</c:forEach>
 				
@@ -71,7 +72,9 @@
 				monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 				monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 				dayNames: ['일','월','화','수','목','금','토'],
-				dayNamesMin : ['일','월','화','수','목','금','토']
+				dayNamesMin : ['일','월','화','수','목','금','토'],
+				todayHighlight: true, 
+				toggleActive: true
 			});
 			
 			

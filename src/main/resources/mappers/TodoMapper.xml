@@ -59,7 +59,7 @@
 		VALUES
 		(
 			#{id}
-			, `false`
+			, false
 			, now()
 		)
 	</insert>

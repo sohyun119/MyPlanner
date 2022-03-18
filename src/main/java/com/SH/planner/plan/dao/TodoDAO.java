@@ -16,8 +16,8 @@ public interface TodoDAO {
 			, @Param("date") Date date
 			);
 
-	public TodoList basicInsertTodo(
-			@Param("todoList") TodoList todoList 
+	public int basicInsertTodo(
+			TodoList todoList 
 			);	
 	
 	public int defaultCheck(@Param("id") int id);
