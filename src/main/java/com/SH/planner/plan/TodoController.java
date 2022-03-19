@@ -56,7 +56,7 @@ public class TodoController {
 			, Model model,
 			@DateTimeFormat(pattern="yyyy-MM-dd")
 			@RequestParam("date") Date date
-			) {
+			) throws ParseException {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		

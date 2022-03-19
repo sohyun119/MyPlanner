@@ -26,13 +26,18 @@
 
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-	
+		
 		<section class="d-flex justify-content-center">
 		<div class="content d-flex justify-content-between">
 			
+			<!-- 달력 (날짜 선택을 위한) -->
+			<div class="mt-3" id="calender"></div>
+			
 			<!-- todo list -->		
 			<div class="col-6">
-				<h4 class="mb-4 text-center" id="datePick"><fmt:formatDate value="${checkDate }" pattern="yyyy-MM-dd"/></h4>
+				<fmt:formatDate var="date" value="${checkDate }" pattern="yyyy-MM-dd" />
+				<h4 class=" text-center" >${date }</h4>
+				<hr>
 				<c:forEach var="data" items="${allTodoList }">
 					<div class="d-flex">
 						<c:choose>
@@ -54,8 +59,6 @@
 				</div>
 			</div>
 			
-			<!-- 달력 (날짜 선택을 위한) -->
-			<div class="ml-3" id="calender"></div>
 			
 		</div>
 		</section>
@@ -74,9 +77,7 @@
 				monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 				monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 				dayNames: ['일','월','화','수','목','금','토'],
-				dayNamesMin : ['일','월','화','수','목','금','토'],
-				todayHighlight: true, 
-				toggleActive: true
+				dayNamesMin : ['일','월','화','수','목','금','토']
 			});
 			
 			$("#calender").change( function(){
@@ -85,11 +86,10 @@
 			});
 			
 			$("#addTodoBtn").on("click", function(){
-				
-				let date = $("#calender").val();
+				let date = "${date}"; // 이것 관련 해서 고민 방향 적어두기
 				let title = $("#addTodo").val();
 				let color = "black";
-			 	alert(date);
+			 	
 				$.ajax({
 					type:"post",
 					url:"/plan/todo/create",
@@ -105,7 +105,7 @@
 					error:function(){
 						alert("입력 에러 발생");
 					}
-				}); 
+				});  
 			});
 			
 			

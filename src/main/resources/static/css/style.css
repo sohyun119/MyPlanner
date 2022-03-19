@@ -7,13 +7,10 @@
 }
 
 header{
-	height:150px;
+	height:100px;
 }
 .content{
 	width:700px;
-}
-.day{
-	width:400px;
 }
 
 #signUpBox{
