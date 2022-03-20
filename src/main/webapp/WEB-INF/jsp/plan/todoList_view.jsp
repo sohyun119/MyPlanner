@@ -38,16 +38,19 @@
 				<fmt:formatDate var="date" value="${checkDate }" pattern="yyyy-MM-dd" />
 				<h4 class=" text-center" >${date }</h4>
 				<hr>
+				
 				<c:forEach var="data" items="${allTodoList }">
 					<div class="d-flex">
-						<c:choose>
-							<c:when test="${data.check == true} ">
-								<div id="cancleCheck"><i class="bi bi-check-square"></i></div>
-							</c:when>
-							<c:otherwise>
-								<div id="check"><i class="bi bi-square"></i></div>
-							</c:otherwise>
-						</c:choose>
+						<a href="#" class="checkBtn" data-id="${data.todoList.id }">
+							<c:choose>
+								<c:when test="${not data.check}">
+									<div><i class="bi bi-square"></i></div>
+								</c:when>
+								<c:when test="${data.check}">
+									<div><i class="bi bi-check-square"></i></div>
+								</c:when>
+							</c:choose>
+						</a>
 						<div class="ml-2">${data.todoList.title }</div>
 					</div>
 				</c:forEach>
@@ -72,6 +75,7 @@
 		
 		$(document).ready(function(){
 			
+			// 데이트피커 기본 설정
 			$("#calender").datepicker({
 				dateFormat: 'yy-mm-dd',
 				monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
@@ -80,23 +84,31 @@
 				dayNamesMin : ['일','월','화','수','목','금','토']
 			});
 			
+			// 데이트피커(달력)에서 다른 날짜 클릭시 todoList_view_otherDay 로 이동 
 			$("#calender").change( function(){
 				let pick = $("#calender").val();
 				location.href="/plan/todoList_view_otherDay?date=" + pick;
 			});
 			
-			$("#addTodoBtn").on("click", function(){
+			// 기본 투두리스트 추가
+			$("#addTodoBtn").on("click", function(e){
+				e.preventDefault();
+				
 				let date = "${date}"; // 이것 관련 해서 고민 방향 적어두기
 				let title = $("#addTodo").val();
 				let color = "black";
 			 	
+				if(title == ""){
+					alert("내용을 적어주세요.");
+					return;
+				}
+				
 				$.ajax({
 					type:"post",
 					url:"/plan/todo/create",
 					data:{"title":title,"date":date,"color":color},
 					success:function(data){
 						if(data.result == "success"){
-							alert("입력성공!");
 							location.reload();
 						}else{
 							alert("입력실패");
@@ -107,6 +119,31 @@
 					}
 				});  
 			});
+			
+			// 투두 체크기능 (체크하기, 체크취소)
+			$(".checkBtn").on("click", function(e){
+				e.preventDefault();
+				
+				let todoListId = $(this).data("id");
+				
+				$.ajax({
+					type:"get",
+					url:"/plan/todo/check",
+					data:{"todoListId":todoListId},
+					success:function(data){
+						if(data.result == "success"){
+							location.reload();
+						}
+						else{
+							alert("체크 변경 실패");
+						}
+					},
+					error:function(){
+						alert("todo 체크 에러발생");
+					}
+				});
+			});
+			
 			
 			
 			

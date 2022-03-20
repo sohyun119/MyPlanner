@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,5 +56,27 @@ public class TodoRestController {
 		
 		return map;
 	}
+	
+	
+	@GetMapping("/todo/check")
+	public Map<String, String> todoCheck(
+			@RequestParam("todoListId") int todoListId
+			){
+		
+		int count = todoBO.changeCheck(todoListId);
+		
+		Map<String, String> map = new HashMap<>();
+		if(count == 1) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		return map;
+	}
+	
+	
+	
+	
+	
 
 }

@@ -58,7 +58,7 @@
 		)
 		VALUES
 		(
-			#{id}
+			#{todoListId}
 			, false
 			, now()
 		)
@@ -74,6 +74,26 @@
 			`todoListId`=#{todoListId}
 	</select>
 
-
+	<update id="cancleCheck" parameterType="int">
+		UPDATE
+			`check`
+		SET
+			`isCheck` = false
+		WHERE
+			`todoListId` = #{todoListId}
+	</update>
+	
+	<update id="plusCheck" parameterType="int">
+		UPDATE
+			`check`
+		SET
+			`isCheck` = true
+		WHERE
+			`todoListId` = #{todoListId}
+	</update>
+	
+	
+	
+	
 
 </mapper>

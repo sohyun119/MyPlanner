@@ -20,13 +20,13 @@ public interface TodoDAO {
 			TodoList todoList 
 			);	
 	
-	public int defaultCheck(@Param("id") int id);
-	
-	
+	public int defaultCheck(@Param("todoListId") int todoListId);
 	
 	public boolean isChecked(@Param("todoListId") int todoListId);
 	
+	public int cancleCheck(@Param("todoListId") int todoListId);
 	
+	public int plusCheck(@Param("todoListId") int todoListId);
 	
 	
 }
