@@ -40,19 +40,49 @@
 				<hr>
 				
 				<c:forEach var="data" items="${allTodoList }">
-					<div class="d-flex">
-						<a href="#" class="checkBtn" data-id="${data.todoList.id }">
-							<c:choose>
-								<c:when test="${not data.check}">
-									<div><i class="bi bi-square"></i></div>
-								</c:when>
-								<c:when test="${data.check}">
-									<div><i class="bi bi-check-square"></i></div>
-								</c:when>
-							</c:choose>
+				
+					<div class="d-flex justify-content-between">
+						<div class="d-flex">
+						
+							<!-- 체크 박스 --> 
+							<a href="#" class="checkBtn" data-id="${data.todoList.id }">
+								<c:choose>
+									<c:when test="${not data.check}">
+										<div class="text-dark"><i class="bi bi-square"></i></div>
+									</c:when>
+									<c:when test="${data.check}">
+										<div class="text-dark"><i class="bi bi-check-square"></i></div>
+									</c:when>
+								</c:choose>
+							</a>
+							
+							<!-- todoList 내용 -->
+							<div class="ml-2">${data.todoList.title }</div>
+							
+						</div>
+						
+						<!-- 삭제, 수정 등 더보기 -->
+						<a href="#" class="moreBtn text-secondary ml-2" data-toggle="modal" data-target="#exampleModalCenter${data.todoList.id }">
+						<i class="bi bi-three-dots"></i>
 						</a>
-						<div class="ml-2">${data.todoList.title }</div>
-					</div>
+					
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModalCenter${data.todoList.id }" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						  <div class="modal-dialog modal-dialog-centered" role="document">
+						    <div class="modal-content">
+						      <div class="modal-body">
+						        <div class="d-flex">
+						        	<h5 class="mr-2 mt-2">일정 변경 : </h5>
+						        	<input type="date" class="changeCalender form-control col-8">
+						        </div>
+						        <button type="button" class="todoCorrectBtn btn btn-info form-control mt-3">내용 수정</button>
+						        <button type="button" class="todoCancleBtn btn btn-info form-control mt-3" data-id="${data.todoList.id }">삭제</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					
+					</div>				
 				</c:forEach>
 				
 				<!-- 일정 추가 -->
@@ -69,7 +99,7 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
 
-</body>
+
 
 	<script>
 		
@@ -145,6 +175,11 @@
 			});
 			
 			
+			$(".todoCancleBtn").on("click", function(){
+				let todoListId = $(this).data("id");
+				alert(todoListId);
+			});
+			
 			
 			
 		});
@@ -155,11 +190,7 @@
 
 
 
-
-
-
-
-
-
+</body>
 
 </html>
+
