@@ -64,5 +64,12 @@ public class TodoBO {
 	}
 	
 	
+	public int deleteTodo(int todoListId) {
+		return todoDAO.deleteTodo(todoListId) + todoDAO.deleteCheck(todoListId);
+	}
+	
+	
+	
+	
 	
 }

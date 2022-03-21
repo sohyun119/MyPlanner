@@ -93,6 +93,20 @@
 	</update>
 	
 	
+	<delete id="deleteTodo" parameterType="int" >
+		DELETE FROM
+			`todoList`
+		WHERE
+			`id` = #{todoListId}
+	</delete>
+	
+	<delete id="deleteCheck" parameterType="int">
+		DELETE FROM
+			`check`
+		WHERE
+			`todoListId` = #{todoListId}
+	</delete>
+	
 	
 	
 

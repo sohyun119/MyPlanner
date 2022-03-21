@@ -28,5 +28,9 @@ public interface TodoDAO {
 	
 	public int plusCheck(@Param("todoListId") int todoListId);
 	
+	public int deleteTodo(@Param("todoListId") int todoListId);
+	
+	public int deleteCheck(@Param("todoListId") int todoListId);
+	
 	
 }

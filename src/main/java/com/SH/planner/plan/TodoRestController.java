@@ -74,7 +74,20 @@ public class TodoRestController {
 		return map;
 	}
 	
-	
+	@GetMapping("/todo/delete")
+	public Map<String, String> todoDelete(
+			@RequestParam("todoListId") int todoListId
+			){
+		int count = todoBO.deleteTodo(todoListId);
+		
+		Map<String, String> map = new HashMap<>();
+		if(count == 2) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		return map;
+	}
 	
 	
 	

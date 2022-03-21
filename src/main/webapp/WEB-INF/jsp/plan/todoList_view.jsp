@@ -71,12 +71,7 @@
 						  <div class="modal-dialog modal-dialog-centered" role="document">
 						    <div class="modal-content">
 						      <div class="modal-body">
-						        <div class="d-flex">
-						        	<h5 class="mr-2 mt-2">일정 변경 : </h5>
-						        	<input type="date" class="changeCalender form-control col-8">
-						        </div>
-						        <button type="button" class="todoCorrectBtn btn btn-info form-control mt-3">내용 수정</button>
-						        <button type="button" class="todoCancleBtn btn btn-info form-control mt-3" data-id="${data.todoList.id }">삭제</button>
+						        <button type="button" class="todoCancleBtn btn btn-primary form-control mt-3" data-id="${data.todoList.id }">삭제</button>
 						      </div>
 						    </div>
 						  </div>
@@ -175,9 +170,29 @@
 			});
 			
 			
-			$(".todoCancleBtn").on("click", function(){
+			
+			// 투두리스트 삭제 기능
+			$(".todoCancleBtn").on("click",function(e){
+				e.preventDefault();
+				
 				let todoListId = $(this).data("id");
-				alert(todoListId);
+				
+				$.ajax({
+					type:"get",
+					url:"/plan/todo/delete",
+					data:{"todoListId":todoListId},
+					success:function(data){
+						if(data.result == "success"){
+							alert("삭제 성공");
+							location.reload();
+						}else{
+							alert("삭제 실패");
+						}
+					},
+					error:function(){
+						alert("투두 삭제 에러");
+					}
+				});
 			});
 			
 			
