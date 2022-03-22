@@ -71,7 +71,7 @@
 						  <div class="modal-dialog modal-dialog-centered" role="document">
 						    <div class="modal-content">
 						      <div class="modal-body">
-						        <button type="button" class="todoCancleBtn btn btn-primary form-control mt-3" data-id="${data.todoList.id }">삭제</button>
+						        <button type="button" class="todoCancleBtn btn btn-primary form-control" data-id="${data.todoList.id }">삭제</button>
 						      </div>
 						    </div>
 						  </div>
