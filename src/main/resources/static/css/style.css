@@ -26,6 +26,14 @@ header{
 	width:350px;
 }
 
+.diaryImgBox{
+	width:300px;
+	background-size: cover;
+}
+.diaryContentBox{
+	width:300px;
+}
+
 
 .ui-widget-header { border: 0px solid #dddddd; background: #fff; } 
 

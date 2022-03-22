@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.SH.planner.diary.dao.DiaryDAO">
+
+	<insert id="insertDiary" parameterType="map">
+		INSERT INTO `diary`
+		(
+			`userId`
+			, `content`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{userId}
+			, #{content}
+			, #{imagePath}
+			, now()
+			, now()
+		)
+	</insert>
+
+	<select id="selectDiaryList" parameterType="int" resultType="com.SH.planner.diary.model.Diary">
+		SELECT
+			`id`
+			, `userId`
+			, `content`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`diary`
+		WHERE
+			`userId` = #{userId}
+		ORDER BY `id` DESC
+	</select>
+
+	<delete id="deleteDiary" parameterType="int">
+		DELETE FROM 
+			`diary`
+		WHERE
+			`id` = #{id}
+	</delete>
+	
+	<select id="selectDiary" parameterType="int" resultType="com.SH.planner.diary.model.Diary">
+		SELECT 
+			`id`
+			, `userId`
+			, `content`
+			, `imagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`diary`
+		WHERE
+			`id` = #{id}
+	</select>
+
+
+
+
+
+
+
+
+
+</mapper>
