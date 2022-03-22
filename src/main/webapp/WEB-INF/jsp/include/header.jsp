@@ -10,7 +10,7 @@
 			<c:when test="${not empty userId }">
 				<div class="d-flex justify-content-center mt-5">
 					<div class="w-50 d-flex justify-content-between">
-						<h2>To do List</h2>
+						<h2>My Planner</h2>
 							<ul class="nav nav-fill">
 								<li class="nav-item">
 									<a href="/plan/todoList_view" class="nav-link text-dark"><i class="bi bi-card-checklist"></i></a>

@@ -36,7 +36,7 @@
 			<!-- todo list -->		
 			<div class="col-6">
 				<fmt:formatDate var="date" value="${checkDate }" pattern="yyyy-MM-dd" />
-				<h4 class=" text-center" >${date }</h4>
+				<h4 class=" text-center" >${date } <span class="text-secondary">Todo List</span></h4>
 				<hr>
 				
 				<c:forEach var="data" items="${allTodoList }">
