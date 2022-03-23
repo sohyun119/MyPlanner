@@ -8,6 +8,7 @@
 		SELECT 
 			`id`
 			, `userId`
+			, `connectedTodoId`
 			, `title`
 			, `date`
 			, `startDate`
@@ -27,6 +28,7 @@
 		INSERT INTO `todoList`
 		(
 			`userId`
+			, `connectedTodoId`
 			, `title`
 			, `date`
 			, `color`
@@ -36,6 +38,7 @@
 		VALUES
 		(
 			#{userId}
+			, #{connectedTodoId}
 			, #{title}
 			, #{date}
 			, #{color}
@@ -111,6 +114,7 @@
 		SELECT 
 			`id`
 			, `userId`
+			, `connectedTodoId`
 			, `title`
 			, `date`
 			, `startDate`
@@ -152,6 +156,7 @@
 		SELECT
 			`id`
 			, `userId`
+			, `connectedTodoId`
 			, `title`
 			, `date`
 			, `startDate`
@@ -165,6 +170,7 @@
 			`userId`=#{userId} AND `color`=#{color} AND
 			<![CDATA[ `startDate` <= #{date}  ]]> AND `endDate` >= #{date}
 	</select>
+
 
 	<update id="fromBlackTodoUpdate" parameterType="int">
 		UPDATE 
@@ -183,6 +189,30 @@
 		WHERE 
 			`id` = #{todoListId}
 	</update>
+
+	
+	<select id="connectedTodoList" parameterType="map" resultType="com.SH.planner.plan.model.TodoList">
+		SELECT 
+			`id`
+			, `userId`
+			, `connectedTodoId`
+			, `title`
+			, `date`
+			, `startDate`
+			, `endDate`
+			, `color`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`todoList`
+		WHERE
+			`userId` = #{userId} AND `date` = #{date} AND
+			 `connectedTodoId` is NOT NULL AND `connectedTodoId` != 0
+	</select>
+
+
+
+
 
 
 

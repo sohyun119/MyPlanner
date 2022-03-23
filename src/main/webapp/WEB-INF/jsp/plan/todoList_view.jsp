@@ -61,7 +61,7 @@
 								<mark class="ml-2 text-danger">${data.todoList.title }</mark>
 							</c:if>
 							
-							<c:if test="${data.todoList.color == 'black'}">
+							<c:if test="${data.todoList.color == 'black' or data.todoList.color == 'gray'}">
 								<div class="ml-2">${data.todoList.title }</div>
 							</c:if>
 						</div>
@@ -78,7 +78,7 @@
 						      <div class="modal-body">
 						      
 						      	<button type="button" class="colorChangeBtn btn btn-primary form-control" data-id="${data.todoList.id }" data-color="${data.todoList.color }">
-							      	<c:if test="${data.todoList.color == 'black' }">
+							      	<c:if test="${data.todoList.color == 'black'}">
 							      	중요 표시 하기
 							      	</c:if>
 							      	<c:if test="${data.todoList.color == 'red' }">
@@ -97,11 +97,18 @@
 				</c:forEach>
 				
 				<!-- 간편입력 todo 에서 불러온 예비 리스트 -->
-				<c:forEach var="simpleTodo" items="${simpleTodoList }">
-					<div class="d-flex">
-						<div class="text-secondary"><i class="bi bi-plus"></i></div>
-						<a href="#" class="ml-2 text-secondary">${simpleTodo.title }</a>
-					</div>
+				<c:forEach var="simpleTodo" items="${simpleTodoList }" >
+					<c:forEach var="connectedTodo" items="${connectedTodoList }">
+					 	<!-- todo로 올라가지 않은 리스트 들만 나열 -->
+					 	<c:if test="${simpleTodo.id ne connectedTodo.connectedTodoId }">
+					 		<div class="d-flex">
+								<div class="text-secondary"><i class="bi bi-plus"></i></div>
+								<a href="#" class="preTodoBtn" data-id="${simpleTodo.id }" data-date="${date }" data-title="${simpleTodo.title }">
+									<span class="ml-2 text-secondary">${simpleTodo.title }</span>
+								</a>
+							</div>
+						</c:if>
+					</c:forEach>
 				</c:forEach>
 				
 				<!-- 일정 추가 -->
@@ -240,6 +247,34 @@
 					}
 				});
 			});
+			
+			// 간편 todo 기본 todo로 이동
+			$(".preTodoBtn").on("click", function(e){
+				e.preventDefault();
+				
+				let todoListId = $(this).data("id");
+				let date = $(this).data("date");
+				let title = $(this).data("title");
+				
+				$.ajax({
+					type:"post",
+					url:"/plan/preTodo/pick",
+					data:{"todoListId":todoListId, "date":date, "title":title},
+					success:function(data){
+						if(data.result == "success"){
+							location.reload();
+						}else{
+							alert("to do List로 변경 실패");
+						}
+					},
+					error:function(){
+						
+					}
+				});
+				
+				
+			});
+			
 			
 			
 			

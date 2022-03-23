@@ -47,10 +47,13 @@ public class TodoController {
 		
 		List<TodoList> simpleTodoList = todoBO.selectPreTodo(userId, today);
 		
+		List<TodoList> connectedTodoList = todoBO.connectedTodoList(userId, today);
+		
 		model.addAttribute("allTodoList", todoListCheck);
 		model.addAttribute("checkDate", today);
 		
 		model.addAttribute("simpleTodoList", simpleTodoList);
+		model.addAttribute("connectedTodoList", connectedTodoList);
 		
 		return "plan/todoList_view";
 	}
@@ -68,10 +71,12 @@ public class TodoController {
 		List<TodoList> todoList = todoBO.selectTodoList(userId, date);
 		List<TodoListCheck> todoListCheck = todoBO.selectTodoListCheck(todoList);
 		List<TodoList> simpleTodoList = todoBO.selectPreTodo(userId, date);
+		List<TodoList> connectedTodoList = todoBO.connectedTodoList(userId, date);
 		
 		model.addAttribute("allTodoList", todoListCheck);
 		model.addAttribute("checkDate", date);
 		model.addAttribute("simpleTodoList", simpleTodoList);
+		model.addAttribute("connectedTodoList", connectedTodoList);
 		
 		return "plan/todoList_view";
 	}

@@ -87,7 +87,8 @@ public class TodoBO {
 	public int todoColorChange(int todoListId, String color) {
 		if(color.equals("red")) {
 			return todoDAO.fromRedTodoUpdate(todoListId);
-		}else if(color.equals("black")) {
+		}
+		else if(color.equals("black")) {
 			return todoDAO.fromBlackTodoUpdate(todoListId);
 		}
 		else {
@@ -96,8 +97,9 @@ public class TodoBO {
 	}
 	
 	
-	
-	
+	public List<TodoList> connectedTodoList(int userId, Date date){
+		return todoDAO.connectedTodoList(userId, date);
+	}
 	
 	
 }

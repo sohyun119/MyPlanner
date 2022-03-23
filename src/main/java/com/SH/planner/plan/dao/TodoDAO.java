@@ -44,11 +44,13 @@ public interface TodoDAO {
 			, @Param("date") Date date, @Param("color") String color);
 	
 	
+	
 	public int fromBlackTodoUpdate(@Param("todoListId") int todoListId);
 	
 	public int fromRedTodoUpdate(@Param("todoListId") int todoListId);
 	
 	
+	public List<TodoList> connectedTodoList(@Param("userId") int userId, @Param("date") Date date);
 	
 	
 	

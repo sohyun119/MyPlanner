@@ -6,6 +6,7 @@ public class TodoList {
 	
 	private int id;
 	private int userId;
+	private int connectedTodoId;
 	private String title;
 	private Date date;
 	private Date startDate;
@@ -14,6 +15,13 @@ public class TodoList {
 	private Date createdAt;
 	private Date updatedAt;
 	
+	
+	public int getConnectedTodoId() {
+		return connectedTodoId;
+	}
+	public void setConnectedTodoId(int connectedTodoId) {
+		this.connectedTodoId = connectedTodoId;
+	}
 	public Date getDate() {
 		return date;
 	}

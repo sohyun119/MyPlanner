@@ -16,7 +16,7 @@
 									<a href="/plan/todoList_view" class="nav-link text-dark"><i class="bi bi-check2-square"></i></a>
 								</li>
 								<li class="nav-item">
-									<a href="/diary/timeline_view" class="nav-link text-dark"><i class="bi bi-journal-richtext"></i></a>
+									<a href="/diary/timeline_view" class="nav-link text-dark">Diary</a>
 								</li>
 								<li class="nav-item">
 									<a href="/plan/todo/simple_create_view" class="nav-link text-dark">todo간편입력</a>

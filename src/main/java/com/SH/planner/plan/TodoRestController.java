@@ -134,5 +134,41 @@ public class TodoRestController {
 		return map;
 	}
 	
+	@PostMapping("/preTodo/pick")
+	public Map<String, String> preTodoPick(
+			@RequestParam("todoListId") int todoListId
+			,@DateTimeFormat(pattern="yyyy-MM-dd")
+			@RequestParam("date") Date date
+			, @RequestParam("title") String title
+			, HttpServletRequest request
+			){
+		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		TodoList todoList = new TodoList();
+		todoList.setUserId(userId);
+		todoList.setConnectedTodoId(todoListId);
+		todoList.setColor("black");
+		todoList.setTitle(title);
+		todoList.setDate(date);
+		int id = todoBO.basicAddTodo(todoList);
+		
+		int count = todoBO.defaultCheck(id);
+
+		Map<String, String> map = new HashMap<>();
+		if(count == 1) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		
+		return map;
+	}
+	
+	
+	
+	
+	
 
 }
