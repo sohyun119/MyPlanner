@@ -81,7 +81,7 @@ public class TodoRestController {
 		int count = todoBO.deleteTodo(todoListId);
 		
 		Map<String, String> map = new HashMap<>();
-		if(count == 2) {
+		if(count >= 1) {
 			map.put("result", "success");
 		}else {
 			map.put("result", "fail");

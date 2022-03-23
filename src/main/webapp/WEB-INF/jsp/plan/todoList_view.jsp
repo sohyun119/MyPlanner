@@ -98,17 +98,12 @@
 				
 				<!-- 간편입력 todo 에서 불러온 예비 리스트 -->
 				<c:forEach var="simpleTodo" items="${simpleTodoList }" >
-					<c:forEach var="connectedTodo" items="${connectedTodoList }">
-					 	<!-- todo로 올라가지 않은 리스트 들만 나열 -->
-					 	<c:if test="${simpleTodo.id ne connectedTodo.connectedTodoId }">
 					 		<div class="d-flex">
 								<div class="text-secondary"><i class="bi bi-plus"></i></div>
 								<a href="#" class="preTodoBtn" data-id="${simpleTodo.id }" data-date="${date }" data-title="${simpleTodo.title }">
 									<span class="ml-2 text-secondary">${simpleTodo.title }</span>
 								</a>
 							</div>
-						</c:if>
-					</c:forEach>
 				</c:forEach>
 				
 				<!-- 일정 추가 -->

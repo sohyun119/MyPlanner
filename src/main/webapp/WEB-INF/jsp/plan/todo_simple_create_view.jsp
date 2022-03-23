@@ -48,9 +48,21 @@
 					<div class="border d-flex mt-3 justify-content-between">
 						<h5 class="mt-3 ml-5">${simpleTodo.title }</h5>
 						<div class="mt-3">시작 날짜 : <fmt:formatDate value="${simpleTodo.startDate }" pattern="yyyy-MM-dd"/></div>
-						<div class="mt-3 mr-5">종료 날짜 : <fmt:formatDate value="${simpleTodo.endDate }" pattern="yyyy-MM-dd"/></div>
+						<div class="mt-3">종료 날짜 : <fmt:formatDate value="${simpleTodo.endDate }" pattern="yyyy-MM-dd"/></div>
+						<a href="#" class="mt-3 mr-5 text-dark" data-toggle="modal" data-target="#exampleModalCenter${simpleTodo.id }"><i class="bi bi-three-dots"></i></a> 
 					</div>
-				
+					
+					<!-- modal -->
+					<div class="modal fade" id="exampleModalCenter${simpleTodo.id }" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+					    	<div class="modal-content">
+					      		<div class="modal-body">
+						  			<button type="button" class="deleteBtn btn btn-info form-control mt-3" data-id="${simpleTodo.id }">삭제</button>
+						   		</div>
+						  	</div>
+			 			</div>
+					</div>
+					
 				</c:forEach>
 			</section>
 		</div>
@@ -100,6 +112,27 @@
 				});
 				
 				
+			});
+			
+			// 간편입력 삭제
+			$(".deleteBtn").on("click", function(){
+				let todoListId = $(this).data("id");
+				
+				$.ajax({
+					type:"get",
+					url:"/plan/todo/delete",
+					data:{"todoListId":todoListId},
+					success:function(data){
+						if(data.result == "success"){
+							location.reload();
+						}else{
+							alert("간편입력 삭제 실패");
+						}
+					},
+					error:function(){
+						alert("간편입력 삭제 에러 발생");
+					}
+				});
 			});
 			
 			
