@@ -32,11 +32,23 @@ public interface TodoDAO {
 	
 	public int deleteCheck(@Param("todoListId") int todoListId);
 	
+	// 간편입력 페이지에서 보이는 list
 	public List<TodoList> selectSimpleTodoList(@Param("userId") int userId, @Param("color") String color);
 	
 	public int insertSimpleTodo(@Param("userId") int userId,
 			@Param("title") String title, 
 			@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("color") String color);
+	
+	// 일반 todo list 화면에서 보일 간편입력한 todo 
+	public List<TodoList> selectPreTodo(@Param("userId") int userId
+			, @Param("date") Date date, @Param("color") String color);
+	
+	
+	public int fromBlackTodoUpdate(@Param("todoListId") int todoListId);
+	
+	public int fromRedTodoUpdate(@Param("todoListId") int todoListId);
+	
+	
 	
 	
 	

@@ -78,6 +78,26 @@ public class TodoBO {
 		return todoDAO.insertSimpleTodo(userId, title, startDate, endDate, color);
 	}
 	
+	public List<TodoList> selectPreTodo(int userId, Date date){
+		String color = "gray";
+		return todoDAO.selectPreTodo(userId, date, color);
+	}
+	
+	
+	public int todoColorChange(int todoListId, String color) {
+		if(color.equals("red")) {
+			return todoDAO.fromRedTodoUpdate(todoListId);
+		}else if(color.equals("black")) {
+			return todoDAO.fromBlackTodoUpdate(todoListId);
+		}
+		else {
+			return 0;
+		}
+	}
+	
+	
+	
+	
 	
 	
 }

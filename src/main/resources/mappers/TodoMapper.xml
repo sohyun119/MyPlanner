@@ -148,6 +148,42 @@
 	</insert>
 	
 	
-	
+	<select id="selectPreTodo" parameterType="map" resultType="com.SH.planner.plan.model.TodoList">
+		SELECT
+			`id`
+			, `userId`
+			, `title`
+			, `date`
+			, `startDate`
+			, `endDate`
+			, `color`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`todoList`
+		WHERE
+			`userId`=#{userId} AND `color`=#{color} AND
+			<![CDATA[ `startDate` <= #{date}  ]]> AND `endDate` >= #{date}
+	</select>
+
+	<update id="fromBlackTodoUpdate" parameterType="int">
+		UPDATE 
+			`todoList`
+		SET 
+			`color` = 'red'
+		WHERE 
+			`id` = #{todoListId}
+	</update>
+
+	<update id="fromRedTodoUpdate" parameterType="int">
+		UPDATE 
+			`todoList`
+		SET 
+			`color` = 'black'
+		WHERE 
+			`id` = #{todoListId}
+	</update>
+
+
 
 </mapper>

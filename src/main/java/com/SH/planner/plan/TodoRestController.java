@@ -116,6 +116,23 @@ public class TodoRestController {
 		return map;
 	}
 	
+	@GetMapping("/todo/colorChange")
+	public Map<String, String> todoColorChange(
+			@RequestParam("color") String color
+			, @RequestParam("todoListId") int todoListId
+			){
+		
+		int count = todoBO.todoColorChange(todoListId, color);
+		
+		Map<String, String> map = new HashMap<>();
+		if(count == 1) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		
+		return map;
+	}
 	
 
 }

@@ -57,8 +57,13 @@
 							</a>
 							
 							<!-- todoList 내용 -->
-							<div class="ml-2">${data.todoList.title }</div>
+							<c:if test="${data.todoList.color == 'red'}">
+								<mark class="ml-2 text-danger">${data.todoList.title }</mark>
+							</c:if>
 							
+							<c:if test="${data.todoList.color == 'black'}">
+								<div class="ml-2">${data.todoList.title }</div>
+							</c:if>
 						</div>
 						
 						<!-- 삭제, 수정 등 더보기 -->
@@ -71,13 +76,32 @@
 						  <div class="modal-dialog modal-dialog-centered" role="document">
 						    <div class="modal-content">
 						      <div class="modal-body">
-						        <button type="button" class="todoCancleBtn btn btn-primary form-control" data-id="${data.todoList.id }">삭제</button>
+						      
+						      	<button type="button" class="colorChangeBtn btn btn-primary form-control" data-id="${data.todoList.id }" data-color="${data.todoList.color }">
+							      	<c:if test="${data.todoList.color == 'black' }">
+							      	중요 표시 하기
+							      	</c:if>
+							      	<c:if test="${data.todoList.color == 'red' }">
+							      	중요 표시 취소
+							      	</c:if>
+						      	</button>
+		
+						      
+						        <button type="button" class="todoCancleBtn btn btn-primary form-control mt-3" data-id="${data.todoList.id }">삭제</button>
 						      </div>
 						    </div>
 						  </div>
 						</div>
 					
 					</div>				
+				</c:forEach>
+				
+				<!-- 간편입력 todo 에서 불러온 예비 리스트 -->
+				<c:forEach var="simpleTodo" items="${simpleTodoList }">
+					<div class="d-flex">
+						<div class="text-secondary"><i class="bi bi-plus"></i></div>
+						<a href="#" class="ml-2 text-secondary">${simpleTodo.title }</a>
+					</div>
 				</c:forEach>
 				
 				<!-- 일정 추가 -->
@@ -191,6 +215,28 @@
 					},
 					error:function(){
 						alert("투두 삭제 에러");
+					}
+				});
+			});
+			
+			// 특정 todo 중요표시 (하기 or 취소 하기)
+			$(".colorChangeBtn").on("click", function(){
+				let todoListId = $(this).data("id");
+				let color = $(this).data("color");
+				
+				$.ajax({
+					type:"get",
+					url:"/plan/todo/colorChange",
+					data:{"todoListId":todoListId, "color":color},
+					success:function(data){
+						if(data.result == "success"){
+							location.reload();
+						}else{
+							alert("중요표시 실패");
+						}
+					},
+					error:function(){
+						alert("to do color change Error");
 					}
 				});
 			});

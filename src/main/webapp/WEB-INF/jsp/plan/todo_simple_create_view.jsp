@@ -21,14 +21,14 @@
 </head>
 <body>
 
-	<div class="wrap">
+	<div id="wrap">
 	
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	
 		<div class="d-flex justify-content-center">
 			<section class="content">
 				<!-- 간편입력 추가 -->
-				<div class="mt-3">
+				<div class="mt-3 mb-3">
 					<div class="d-flex mt-2">
 						<span>시작날짜 : </span>
 						<input type="date" id="startDateInput" class="form-control col-4 ml-2">
@@ -40,14 +40,15 @@
 						<button type="button" id="addBtn" class="btn btn-sm btn-info ml-3">추가</button>
 					</div>
 				</div>
-			
+				<hr>
+				
 				<!-- 간편입력 리스트 -->
 				<c:forEach var="simpleTodo" items="${simpleTodoList }">
 				
-					<div class="border d-flex">
-						<div class="mt-3 ml-2">${simpleTodo.title }</div>
-						<div class="mt-3 ml-2"><fmt:formatDate value="${simpleTodo.startDate }" pattern="yyyy-MM-dd"/></div>
-						<div class="mt-3 mx-2"><fmt:formatDate value="${simpleTodo.endDate }" pattern="yyyy-MM-dd"/></div>
+					<div class="border d-flex mt-3 justify-content-between">
+						<h5 class="mt-3 ml-5">${simpleTodo.title }</h5>
+						<div class="mt-3">시작 날짜 : <fmt:formatDate value="${simpleTodo.startDate }" pattern="yyyy-MM-dd"/></div>
+						<div class="mt-3 mr-5">종료 날짜 : <fmt:formatDate value="${simpleTodo.endDate }" pattern="yyyy-MM-dd"/></div>
 					</div>
 				
 				</c:forEach>
@@ -62,6 +63,7 @@
 	
 		$(document).ready(function(){
 			
+
 			$("#addBtn").on("click", function(){
 				let title = $("#titleInput").val();
 				let startDate = $("#startDateInput").val();
