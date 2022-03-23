@@ -2,6 +2,7 @@ package com.SH.planner.plan;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class TodoController {
 		return "plan/todoList_view";
 	}
 	
-	@RequestMapping("/todoList_view_otherDay")
+	@GetMapping("/todoList_view_otherDay")
 	public String todoListView_otherDay(
 			HttpServletRequest request
 			, Model model,
@@ -69,6 +70,22 @@ public class TodoController {
 		return "plan/todoList_view";
 	}
 
+	
+	@GetMapping("/todo/simple_create_view")
+	public String todoSimpleCreate(
+			HttpServletRequest request
+			, Model model
+			) {
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		List<TodoList> simpleTodoList = new ArrayList<>();
+		simpleTodoList = todoBO.selectSimpleTodoList(userId);
+		
+		model.addAttribute(simpleTodoList);
+		
+		return "plan/todo_simple_create_view";
+	}
 	
 	
 	

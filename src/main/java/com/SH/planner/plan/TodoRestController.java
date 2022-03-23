@@ -90,6 +90,32 @@ public class TodoRestController {
 	}
 	
 	
+	@PostMapping("/todo/simple_create")
+	public Map<String, String> todoSimpleCreate(
+			@RequestParam("title") String title
+			,
+			@DateTimeFormat(pattern="yyyy-MM-dd")
+			@RequestParam("startDate") Date startDate
+			, 
+			@DateTimeFormat(pattern="yyyy-MM-dd")
+			@RequestParam("endDate") Date endDate
+			, HttpServletRequest request
+			){
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = todoBO.insertSimpleTodo(userId, title, startDate, endDate);
+		
+		Map<String, String> map = new HashMap<>();
+		if(count == 1) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		
+		return map;
+	}
+	
 	
 
 }

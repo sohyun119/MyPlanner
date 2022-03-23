@@ -18,9 +18,8 @@
 		FROM 
 			`todoList`
 		WHERE
-			((`startDate`<![CDATA[ <= ]]>#{date} AND `endDate` >= #{date}) OR `date` = #{date} ) 
+			`date` = #{date}
 			AND `userId` = #{userId}
-		
 	</select>
 
 
@@ -106,6 +105,47 @@
 		WHERE
 			`todoListId` = #{todoListId}
 	</delete>
+	
+	
+	<select id="selectSimpleTodoList" parameterType="map" resultType="com.SH.planner.plan.model.TodoList">
+		SELECT 
+			`id`
+			, `userId`
+			, `title`
+			, `date`
+			, `startDate`
+			, `endDate`
+			, `color`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`todoList`
+		WHERE
+			`userId` = #{userId} AND `color` = #{color}
+	</select>
+	
+	<insert id="insertSimpleTodo" parameterType="map">
+		INSERT INTO `todoList`
+		(
+			`userId`
+			, `title`
+			, `startDate`
+			, `endDate`
+			, `color`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{userId}
+			, #{title}
+			, #{startDate}
+			, #{endDate}
+			, #{color}
+			, now()
+			, now()
+		)
+	</insert>
 	
 	
 	

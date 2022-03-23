@@ -36,14 +36,14 @@
 			<!-- todo list -->		
 			<div class="col-6">
 				<fmt:formatDate var="date" value="${checkDate }" pattern="yyyy-MM-dd" />
-				<h4 class=" text-center" >${date } <span class="text-secondary">Todo List</span></h4>
+				<h4 class=" text-center" >${date } <span class="text-secondary">. Todo List</span></h4>
 				<hr>
 				
 				<c:forEach var="data" items="${allTodoList }">
 				
 					<div class="d-flex justify-content-between">
-						<div class="d-flex">
-						
+						<div class="d-flex"> 
+							
 							<!-- 체크 박스 --> 
 							<a href="#" class="checkBtn" data-id="${data.todoList.id }">
 								<c:choose>
@@ -81,7 +81,7 @@
 				</c:forEach>
 				
 				<!-- 일정 추가 -->
-				<div class="d-flex justify-content-center mt-3">
+				<div class="d-flex justify-content-center mt-4">
 					<input type="text" id="addTodo" class="form-control" placeholder="+ 일정추가">
 					<button type="button" id="addTodoBtn" class="btn btn-secondary btn-sm ml-2">추가</button>
 				</div>

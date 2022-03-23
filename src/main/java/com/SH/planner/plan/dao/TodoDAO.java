@@ -32,5 +32,14 @@ public interface TodoDAO {
 	
 	public int deleteCheck(@Param("todoListId") int todoListId);
 	
+	public List<TodoList> selectSimpleTodoList(@Param("userId") int userId, @Param("color") String color);
+	
+	public int insertSimpleTodo(@Param("userId") int userId,
+			@Param("title") String title, 
+			@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("color") String color);
+	
+	
+	
+	
 	
 }

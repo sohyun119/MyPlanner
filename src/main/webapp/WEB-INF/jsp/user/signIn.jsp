@@ -52,6 +52,15 @@
 				let loginId = $("#loginIdInput").val();
 				let password = $("#passwordInput").val();
 				
+				if(loginId == ""){
+					alert("아이디를 입력해주세요.");
+					return;
+				}
+				if(password == ""){
+					alert("비밀번호를 입력해주세요.");
+					return;
+				}
+				
 				$.ajax({
 					type:"post",
 					url:"/user/sign_in",
@@ -60,11 +69,11 @@
 						if(data.result == "success"){
 							location.href="/plan/todoList_view";
 						}else{
-							alert("로그인 실패");
+							alert("아이디 또는 비밀번호를 확인해주세요.");
 						}
 					},
 					error:function(){
-						alert("에러 발생");
+						alert("로그인 에러 발생");
 					}
 				});
 			});	

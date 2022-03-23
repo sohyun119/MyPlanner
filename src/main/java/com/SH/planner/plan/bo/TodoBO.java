@@ -68,7 +68,15 @@ public class TodoBO {
 		return todoDAO.deleteTodo(todoListId) + todoDAO.deleteCheck(todoListId);
 	}
 	
+	public List<TodoList> selectSimpleTodoList(int userId){
+		String color = "gray";
+		return todoDAO.selectSimpleTodoList(userId, color);
+	}
 	
+	public int insertSimpleTodo(int userId, String title, Date startDate, Date endDate) {
+		String color = "gray";
+		return todoDAO.insertSimpleTodo(userId, title, startDate, endDate, color);
+	}
 	
 	
 	
