@@ -97,14 +97,33 @@
 				</c:forEach>
 				
 				<!-- 간편입력 todo 에서 불러온 예비 리스트 -->
-				<c:forEach var="simpleTodo" items="${simpleTodoList }" >
-					 		<div class="d-flex">
+				<c:forEach var = "simpleTodo" items="${simpleTodoList }">
+					<!--connected == null (empty) 이면 main todo로 올라간게 없으므로 그냥 다 보여주고, 하나라도 있다면 아래와 같이 조건을 통해 보여준다.-->
+					<c:choose>
+						<c:when test="${empty connectedTodoList}">
+							<div class="d-flex">
 								<div class="text-secondary"><i class="bi bi-plus"></i></div>
-								<a href="#" class="preTodoBtn" data-id="${simpleTodo.id }" data-date="${date }" data-title="${simpleTodo.title }">
+								<a href="#" class="preTodoBtn"  data-id="${simpleTodo.id }" data-title="${simpleTodo.title }">
 									<span class="ml-2 text-secondary">${simpleTodo.title }</span>
 								</a>
 							</div>
+						</c:when>
+						
+						<c:otherwise>
+							<c:forEach var = "connectedTodo" items="${connectedTodoList }">
+								<c:if test="${simpleTodo.id != connectedTodo.connectedTodoId }">
+									<div class="d-flex">
+										<div class="text-secondary"><i class="bi bi-plus"></i></div>
+										<a href="#" class="preTodoBtn"  data-id="${simpleTodo.id }" data-title="${simpleTodo.title }">
+											<span class="ml-2 text-secondary">${simpleTodo.title }</span>
+										</a>
+									</div>
+								</c:if>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
+				
 				
 				<!-- 일정 추가 -->
 				<div class="d-flex justify-content-center mt-4">
@@ -244,11 +263,10 @@
 			});
 			
 			// 간편 todo 기본 todo로 이동
-			$(".preTodoBtn").on("click", function(e){
-				e.preventDefault();
+			$(".preTodoBtn").on("click", function(){
 				
 				let todoListId = $(this).data("id");
-				let date = $(this).data("date");
+				let date = "${date}";
 				let title = $(this).data("title");
 				
 				$.ajax({
