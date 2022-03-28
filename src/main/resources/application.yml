@@ -12,4 +12,4 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/myPlanner?characterEncoding=UTF-8
     username: root
-    password: thgus0803!
+    password: Thgus0803!
